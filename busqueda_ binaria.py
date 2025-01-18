@@ -39,3 +39,30 @@ def busqueda_binaria(lista, objetivo, limite_inferior=None, limite_superior=None
         return busqueda_binaria(lista, objetivo, limite_inferior, punto_medio-1)
     else:
         return busqueda_binaria(lista, objetivo, punto_medio+1, limite_superior)
+    
+    
+if __name__=='__main__':
+    
+    # Crear una lista ordenada con 10000 numeros aleatorios
+    tamaño = 10000
+    conjunto_inicial = set()
+    
+    while len(conjunto_inicial) < tamaño:
+        conjunto_inicial.add(random.randint(-3*tamaño, 3*tamaño))
+        
+    lista_ordenada = sorted(list(conjunto_inicial))
+    
+    # Medir el tiempo de busqueda inocente
+    inicio = time.time()
+    for objetivo in lista_ordenada:
+        busqueda_inocente(lista_ordenada, objetivo)
+    fin = time.time()
+    print(f"Tiempo de busqueda ingenua: {fin - inicio} segundos.")
+    
+    
+    # Medir el tiempo de busqueda binaria. 
+    inicio = time.time()
+    for objetivo in lista_ordenada:
+        busqueda_binaria(lista_ordenada, objetivo)
+    fin = time.time()
+    print(f"Tiempo de busqueda binaria: {fin - inicio} segundos.")
